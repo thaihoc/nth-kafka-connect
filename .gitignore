@@ -1,0 +1,5 @@
+.DS_Store
+Thumbs.db
+
+kafka_2.13-3.7.0.tgz
+debezium-connector-oracle-2.6.1.Final-plugin.tar.gz
