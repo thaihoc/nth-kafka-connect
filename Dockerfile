@@ -30,8 +30,10 @@ ENV PLUGIN_PATH=$KAFKA_CONNECT_PLUGINS
 # Copy Kafka đã giải nén sẵn vào image
 ADD kafka_2.13-3.7.0.tgz /opt
 
-# Copy plugin Debezium vào thư mục plugins
+# Copy plugin Debezium và các thư viện liên quan vào thư mục plugins
 ADD debezium-connector-oracle-2.6.1.Final-plugin.tar.gz $KAFKA_CONNECT_PLUGINS/
+COPY ojdbc8-21.11.0.0.jar $KAFKA_CONNECT_PLUGINS/debezium-connector-oracle
+COPY xdb-21.11.0.0.jar $KAFKA_CONNECT_PLUGINS/debezium-connector-oracle
 
 # Tạo config cho Kafka Connect
 COPY entrypoint.sh $NTH/
