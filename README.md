@@ -29,8 +29,13 @@ Sau khi tải xong chúng ta tiến hành build image:
 ```bash
 podman build -t nth-kafka-connect:3.7.0-oracle19c .
 ```
+Cài đặt Oracle và Kafka theo hướng dẫn:
 
-Giả sử Oracle và Kafka đã được cài đặt trước theo hướng dẫn cài đặt Oracle và Kafka ở link bên dưới bạn đã có thể start Kafka Connect:
+* Hướng dẫn cài đặt Oracle 19c sử dụng Podman: https://github.com/thaihoc/nth-oracle/blob/main/README.md
+* Hướng dẫn cài đặt Kafka 3.7.0 sử dụng Podman: https://github.com/thaihoc/nth-kafka/blob/main/README.md
+
+
+Giờ đây bạn đã có thể start Kafka Connect:
 
 ```bash
 podman run -d --network nth --name kafka-connect-370 -p 8083:8083
@@ -204,10 +209,6 @@ Tài liệu Kafka Connect v3.7.0: https://kafka.apache.org/37/documentation.html
 Kafka Connect v3.7.0 REST API Swagger: https://kafka.apache.org/37/generated/connect_rest.yaml
 
 Tài liệu về Debezium Connector v2.6: https://debezium.io/releases/2.6/
-
-Hướng dẫn cài đặt Oracle 19c sử dụng Podman: https://github.com/thaihoc/nth-oracle/blob/main/README.md
-
-Hướng dẫn cài đặt Kafka 3.7.0 sử dụng Podman: https://github.com/thaihoc/nth-kafka/blob/main/README.md
 
 Kiểm tra network
 
