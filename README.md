@@ -8,7 +8,7 @@ Kafka cluster v3.7.0.
 
 ElasticSearch 8.x
 
-Kafka Connect v3.7.0: Sử dụng Debezium Connector v2.6 cho Oracle, dùng cơ chế LogMiner để đọc redo log trong Oracle.
+Kafka Connect v3.7.0: Sử dụng Debezium Connector v2.6 cho Oracle, dùng công cụ LogMiner để đọc redo log trong Oracle.
 
 Sử dụng Podman để build và run image. OS arch: amd64.
 
