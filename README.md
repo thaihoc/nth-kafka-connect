@@ -1,4 +1,4 @@
-# Thử nghiệm triển khai CDC sử dụng Kafka Connect, Oracle và Debezium Connector
+# Thử nghiệm triển khai CDC cho Oracle sử dụng Kafka Connect và Debezium Connector
 
 ## Môi trường
 
@@ -18,19 +18,19 @@ Xây dựng luồng stream dữ liệu từ Oracle sang Elastic Search sử dụ
 
 ## Cài đặt 
 
-Tải source binary của Kafka và Debezium về thư mục project.
+Vì Github không thể lưu file có dung lượng quá lớn bạn cần tải source binary của Kafka và Debezium về thư mục project.
 
 Link download Kafka: https://archive.apache.org/dist/kafka/3.7.0/kafka_2.13-3.7.0.tgz
 
 Link download Debezium Connector: https://repo1.maven.org/maven2/io/debezium/debezium-connector-oracle/2.6.1.Final/debezium-connector-oracle-2.6.1.Final-plugin.tar.gz
 
-Build image
+Sau khi tải xong chúng ta tiến hành build image:
 
 ```bash
 podman build -t nth-kafka-connect:3.7.0-oracle19c .
 ```
 
-Giả sử Oracle và Kafka đã được cài đặt trước theo hướng dẫn cài đặt Oracle và Kafka ở link bên dưới. Start Kafka Connect:
+Giả sử Oracle và Kafka đã được cài đặt trước theo hướng dẫn cài đặt Oracle và Kafka ở link bên dưới bạn đã có thể start Kafka Connect:
 
 ```bash
 podman run -d --network nth --name kafka-connect-370 -p 8083:8083
@@ -72,6 +72,10 @@ Kiểm tra Kafka connect đã được cài đặt thành công bằng cách tru
 
 Tham khảo hướng dẫn chi tiết của Debezium: https://debezium.io/documentation/reference/2.6/connectors/oracle.html#setting-up-oracle
 
+#### Tạo dữ liệu mẫu để thử nghiệm
+
+Tạo dữ liệu mẫu theo hướng dẫn được cung cấp tại: https://github.com/thaihoc/oracle-sample-db
+
 #### Cấu hình Supplemetal Logging
 
 Enable supplemental logging ở mức DB để phục vụ cho những event cần lưu đầy đủ thông tin dạng before/after. Chạy lệnh sau với tài khoản DBA lần lượt trên CDB và PDB1:
@@ -91,7 +95,7 @@ CREATE TABLESPACE logminer_tbs DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/lo
     SIZE 25M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
 ```
 
-Đăng nhập vào CDP bằng tài khoản DBA và lần lượt chạy các lệnh:
+Đăng nhập vào CDB bằng tài khoản DBA và lần lượt chạy các lệnh:
 
 ```sql
 CREATE TABLESPACE logminer_tbs DATAFILE '/opt/oracle/oradata/ORCLCDB/logminer_tbs.dbf'
@@ -133,7 +137,7 @@ GRANT SELECT ON V_$MYSTAT TO c##dbzuser CONTAINER=ALL;
 GRANT SELECT ON V_$STATNAME TO c##dbzuser CONTAINER=ALL; 
 ```
 
-#### Tạo Connector
+#### Tạo Source Connector
 
 Trên Linux:
 
