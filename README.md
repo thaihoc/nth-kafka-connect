@@ -86,6 +86,7 @@ Tạo dữ liệu mẫu theo hướng dẫn được cung cấp tại: https://g
 Enable supplemental logging ở mức DB để phục vụ cho những event cần lưu đầy đủ thông tin dạng before/after. Chạy lệnh sau với tài khoản DBA lần lượt trên CDB và PDB1:
 
 ```sql
+ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
 ALTER DATABASE ADD SUPPLEMENTAL LOG DATA (PRIMARY KEY) COLUMNS;
 ```
 
@@ -191,15 +192,13 @@ Response tạo thành công với status code 201 và response body:
 Dữ liệu bảng `NTH_SAMPLE.STUDENTS`:
 
 ```bash
-podman exec -it kafka370
-  kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic nth1.NTH_SAMPLE.STUDENTS --from-beginning
+podman exec -it kafka370 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic nth1.NTH_SAMPLE.STUDENTS --from-beginning
 ```
 
 Dữ liệu bảng `NTH_SAMPLE.COURSES`:
 
 ```bash
-podman exec -it kafka370
-  kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic nth1.NTH_SAMPLE.COURSES --from-beginning
+podman exec -it kafka370 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic nth1.NTH_SAMPLE.COURSES --from-beginning
 ```
 
 ## Tham khảo
@@ -221,3 +220,15 @@ podman run --rm -it --network nth --cap-add=NET_RAW busybox ping kafka370
 ```bash
 podman exec -it oracle19c sqlplus / as sysdba
 ```
+
+Kiểm tra Supplemental Logging đã bật:
+
+```sql
+SELECT SUPPLEMENTAL_LOG_DATA_MIN,
+       SUPPLEMENTAL_LOG_DATA_PK,
+       SUPPLEMENTAL_LOG_DATA_UI,
+       SUPPLEMENTAL_LOG_DATA_FK
+FROM V$DATABASE;
+```
+
+Kết quả mong muốn: Ít nhất cột `SUPPLEMENTAL_LOG_DATA_MIN` và `SUPPLEMENTAL_LOG_DATA_PK` phải là `YES`.
