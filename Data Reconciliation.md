@@ -48,7 +48,7 @@ Cách thực hiện:
 Nhược điểm:
 - Nếu lệch vài bản ghi, chỉ biết có lệch mà không biết chi tiết bản ghi nào
 
-## So sánh mức row-level
+## So sánh row-by-row
 
 Ý tưởng: kiểm tra và so sánh dữ liệu theo từng dòng dữ liệu giữa DB nguồn và DB đích.
 
