@@ -39,7 +39,6 @@ Cách thực hiện:
 - Dễ thực hiện
 - Hiệu năng tốt
 - Dữ liệu phát sinh ít
-- Không ảnh hưởng khi thiết kế DB giữa DB nguồn và DB đích khác nhau
 - Áp dụng được cho dữ liệu cũ
 
 Nhược điểm:
@@ -57,6 +56,7 @@ Cách thực hiện:
 
 Ưu điểm:
 - Đảm bảo dữ liệu nhất quán (100% chính xác)
+- Áp dụng được cho dữ liệu cũ
 
 Nhược điểm:
 - Rất tốn tài nguyên (CPU, RAM, I/O, network)
@@ -75,6 +75,7 @@ Cách thực hiện:
 Ưu điểm:
 - Đảm bảo được dữ liệu luôn khớp ở góc nhìn end-user
 - Có thể tận dụng các báo cáo hoặc nhắc việc sẳn có
+- Áp dụng được cho dữ liệu cũ
 
 Nhược điểm:
 - Cần phải hiểu rõ nghiệp vụ
