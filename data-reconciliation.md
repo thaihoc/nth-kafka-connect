@@ -29,8 +29,7 @@ Mẹo: thay vì lưu dữ liệu Audit trực tiếp vào Oracle, ta có thể d
 Ý tưởng: so sánh số lượng bảng ghi giữa DB nguồn và DB đích.
 
 Cách thực hiện:
-- Tại DB đích tạo thêm bảng để lưu tổng số lượng bản ghi đã CDC thành công của từng bảng ở DB nguồn
-- Khi nhận dữ liệu từ Kafka thực hiện update số lượng bản ghi
+- Đảm bảo rằng DB đích luôn có bảng dữ liệu tương ứng với DB nguồn
 - Viết Job định kỳ so sánh số lượng bản ghi giữa DB nguồn và DB đích
 - Cung cấp metrics cho hệ thống giám sát
 - Có thể chia dữ liệu theo range để dễ khoanh vùng dữ liệu lỗi
@@ -49,7 +48,7 @@ Nhược điểm:
 Ý tưởng: kiểm tra và so sánh dữ liệu theo từng dòng dữ liệu giữa DB nguồn và DB đích.
 
 Cách thực hiện:
-- Dữ liệu khi nhận được từ Kafka thực hiện lưu vào DB đích tương ứng
+- Đảm bảo rằng DB đích luôn có bảng dữ liệu tương ứng với DB nguồn
 - Viết Job định kỳ so sánh dữ liệu theo dừng dòng dữ liệu giữa bảng ở DB nguồn và DB đích
 - Cung cấp các metrics cho hệ thống giám sát (số lượng bản ghi lệch, danh sách bản ghi lệch, ...)
 - Có thể chia dữ liệu theo range để tối ưu hiệu năng và dễ dàng đối soát đối với trường hợp DB dữ liệu lớn.
